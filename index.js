@@ -38,7 +38,12 @@ async function run() {
     });
     // get
     app.get("/products", async (req, res) => {
-      const products = await productColection.find({}).toArray();
+      const products = await productColection
+        .find({})
+        .sort({ price_min: 1 })
+        .limit(5)
+        .toArray();
+
       res.send(products);
     });
 
